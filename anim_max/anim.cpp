@@ -54,6 +54,8 @@ void draw_polygon(HDC hDc, CVect* pVect, int nPoints);
 BOOL chek = TRUE, chek2 = TRUE;
 static int tm;
 static double color = 0;
+static double color2 = 0;
+
 /********************************************************************/
 /*                        anim_main                                 */
 /*                        ==========                                */
@@ -84,7 +86,7 @@ BOOL  anim_main(HWND hwnd)
 	HPEN pen_white = CreatePen(PS_SOLID, NULL, RGB(255, 255, 255));
 
 	HBRUSH
-		hbr_red = CreateSolidBrush(RGB(255, color, 0)),
+		hbr_red = CreateSolidBrush(RGB(color2, color, 0)),
 		hbr_green = CreateSolidBrush(RGB(0, 255, 0)),
 		hbr_prv = (HBRUSH)SelectObject(hdc, hbr_red);
 
@@ -120,8 +122,9 @@ BOOL  anim_main(HWND hwnd)
 		vt.y = (Y_SPACE_ANIM / 2) * dk;
 		MatrTransl(mt, vt);
 		color -= 3;
+		color2 -= 3;
 	}
-
+	color2 += 1;
 	color += 1;
 	MatrRot(mr, ang);
 	MatrScale(ms, k_sc, k_sc);
